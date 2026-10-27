@@ -1,0 +1,671 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Healthcare PMS | Project Management</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="brand">
+            <span class="brand-icon">+</span>
+            <div>
+                <h2>HealthPMS</h2>
+                <small>Project Management</small>
+            </div>
+        </div>
+
+        <p class="menu-label">MAIN MENU</p>
+
+        <nav aria-label="Main navigation">
+            <a href="#dashboard" class="nav-link active">▦ Dashboard</a>
+            <a href="#initiation" class="nav-link">▣ Project Initiation</a>
+            <a href="#scope" class="nav-link">☷ Scope &amp; WBS</a>
+            <a href="#schedule" class="nav-link">◷ Schedule &amp; Resources</a>
+            <a href="#cost" class="nav-link">৳ Cost &amp; EVM</a>
+            <a href="#quality" class="nav-link">✓ Quality &amp; Risks</a>
+            <a href="#reports" class="nav-link">▤ Reports</a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <strong>COMSATS University</strong>
+            <small>Software Project Management</small>
+            <small>CSE-494 | Fall 2026</small>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <header class="topbar">
+            <div>
+                <h1>Smart Healthcare PMS</h1>
+                <p>Manage your project, schedule, budget and quality.</p>
+            </div>
+            <span class="status-badge" id="headerStatus">Loading...</span>
+        </header>
+
+        <!-- MODULE 0: DASHBOARD -->
+        <section id="dashboard" class="page-section">
+            <div class="welcome">
+                <div>
+                    <h2>Project Overview</h2>
+                    <p>Monitor your healthcare software development project.</p>
+                </div>
+
+                <button class="primary-btn" id="detailsButton" type="button">
+                    View Project Details
+                </button>
+            </div>
+
+            <div class="stats-grid">
+                <article class="stat-card">
+                    <span>Approved Budget</span>
+                    <h2 id="dashboardBudget">Loading...</h2>
+                    <small>Current approved baseline</small>
+                </article>
+
+                <article class="stat-card">
+                    <span>Project Duration</span>
+                    <h2 id="dashboardDuration">Loading...</h2>
+                    <small>Current approved baseline</small>
+                </article>
+
+                <article class="stat-card">
+                    <span>Hospital Network</span>
+                    <h2>5 Hospitals</h2>
+                    <small>Project stakeholders</small>
+                </article>
+
+                <article class="stat-card">
+                    <span>Team Members</span>
+                    <h2>7 Members</h2>
+                    <small>Including project manager</small>
+                </article>
+            </div>
+
+            <div class="content-grid">
+                <article class="panel">
+                    <h3>Project Information</h3>
+                    <div id="project-details">
+                        <p>Loading project information...</p>
+                    </div>
+
+                    <div id="message"
+                         class="message"
+                         role="status"
+                         aria-live="polite"
+                         hidden></div>
+                </article>
+
+                <article class="panel">
+                    <h3>Project Alerts</h3>
+
+                    <div class="alert alert-warning">
+                        <strong>Pending Change Request</strong>
+                        <p>
+                            AI diagnosis and mobile application require
+                            formal approval. Proposed additional cost:
+                            PKR 800,000 and three weeks.
+                        </p>
+                    </div>
+
+                    <div class="alert alert-danger">
+                        <strong>Critical Defects</strong>
+                        <p>
+                            Appointment scheduling and patient record
+                            management require corrective action.
+                        </p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- MODULE 1: PROJECT INITIATION -->
+        <section id="initiation" class="module-section">
+            <h2>1. Project Initiation &amp; Integration Management</h2>
+            <p>
+                Create and update the project charter and management plan.
+                Required fields are marked with an asterisk.
+            </p>
+
+            <form id="initiationForm" class="project-form">
+                <label for="project_name">Project Name *</label>
+                <input id="project_name" name="project_name"
+                       type="text" maxlength="200" required>
+
+                <label for="client_name">Client / Organization *</label>
+                <input id="client_name" name="client_name"
+                       type="text" maxlength="200" required>
+
+                <label for="objectives">Project Objectives *</label>
+                <textarea id="objectives" name="objectives"
+                          rows="3" required></textarea>
+
+                <label for="scope_inclusions">Scope Inclusions *</label>
+                <textarea id="scope_inclusions" name="scope_inclusions"
+                          rows="3" required></textarea>
+
+                <label for="scope_exclusions">Scope Exclusions *</label>
+                <textarea id="scope_exclusions" name="scope_exclusions"
+                          rows="3" required></textarea>
+
+                <label for="stakeholders">Project Stakeholders *</label>
+                <textarea id="stakeholders" name="stakeholders"
+                          rows="3" required></textarea>
+
+                <label for="approved_budget">Approved Baseline Budget (PKR) *</label>
+                <input id="approved_budget" name="approved_budget"
+                       type="number" min="0.01" step="0.01" required>
+
+                <label for="baseline_weeks">Baseline Duration (Weeks) *</label>
+                <input id="baseline_weeks" name="baseline_weeks"
+                       type="number" min="1" max="520" step="1" required>
+
+                <label for="start_date">Project Start Date</label>
+                <input id="start_date" name="start_date" type="date">
+
+                <label for="deadline">Project Deadline</label>
+                <input id="deadline" name="deadline" type="date">
+
+                <label for="status">Project Status *</label>
+                <select id="status" name="status" required>
+                    <option value="In Progress">In Progress</option>
+                    <option value="On Hold">On Hold</option>
+                    <option value="Completed">Completed</option>
+                    <option value="Cancelled">Cancelled</option>
+                </select>
+
+                <label for="quality_plan">Quality Management Plan *</label>
+                <textarea id="quality_plan" name="quality_plan"
+                          rows="4" required></textarea>
+
+                <div class="form-actions">
+                    <button class="primary-btn" id="saveInitiation"
+                            type="submit">
+                        Save Project Charter &amp; Plan
+                    </button>
+
+                    <button class="secondary-btn" id="reloadInitiation"
+                            type="button">
+                        Reload Saved Data
+                    </button>
+                </div>
+
+                <p id="initiationMessage" class="message"
+                   role="status" aria-live="polite"></p>
+            </form>
+
+            <article class="panel">
+                <h3>Project Baseline</h3>
+                <p>Original approved budget: <strong>PKR 5,000,000</strong></p>
+                <p>Original approved duration: <strong>16 weeks</strong></p>
+                <p>
+                    Proposed changes must be formally approved before
+                    updating the current approved baseline.
+                </p>
+            </article>
+
+            <article class="panel">
+                <h3>Milestones, Responsibilities &amp; Closure</h3>
+                <p>
+                    Milestone tracking, assigned responsibilities and
+                    closure records can be connected to dedicated database
+                    tables in a later implementation step.
+                </p>
+            </article>
+        </section>
+
+        <!-- MODULE 2: SCOPE MANAGEMENT & WBS -->
+        <section id="scope" class="module-section">
+            <h2>2. Scope Management &amp; WBS</h2>
+            <p>
+                Add requirements, manage priorities, review approvals
+                and submit project change requests.
+            </p>
+
+            <article class="panel">
+                <h3>Add New Requirement</h3>
+
+                <form id="requirementForm" class="project-form">
+                    <label for="reqTitle">Requirement Title *</label>
+                    <input id="reqTitle" name="title"
+                           type="text" maxlength="200" required
+                           placeholder="e.g. Pharmacy Management">
+
+                    <label for="reqDescription">Description</label>
+                    <textarea id="reqDescription" name="description"
+                              rows="3"
+                              placeholder="Describe the requirement"></textarea>
+
+                    <label for="reqPriority">Priority *</label>
+                    <select id="reqPriority" name="priority" required>
+                        <option value="High">High</option>
+                        <option value="Medium" selected>Medium</option>
+                        <option value="Low">Low</option>
+                    </select>
+
+                    <button class="primary-btn" type="submit">
+                        Add Requirement
+                    </button>
+
+                    <p id="requirementMessage" class="message"
+                       role="status" aria-live="polite"></p>
+                </form>
+            </article>
+
+            <article class="panel">
+                <div class="section-heading">
+                    <h3>Project Requirements</h3>
+                    <button class="secondary-btn" id="refreshScope"
+                            type="button">Refresh Data</button>
+                </div>
+
+                <div id="requirementsList">Loading requirements...</div>
+            </article>
+
+            <article class="panel">
+                <h3>Submit Change Request</h3>
+
+                <form id="changeRequestForm" class="project-form">
+                    <label for="changeTitle">Change Title *</label>
+                    <input id="changeTitle" name="title"
+                           type="text" maxlength="200" required
+                           placeholder="Enter change title">
+
+                    <label for="changeJustification">Justification *</label>
+                    <textarea id="changeJustification" name="justification"
+                              rows="3" required
+                              placeholder="Why is this change needed?"></textarea>
+
+                    <label for="changeCost">Additional Cost (PKR) *</label>
+                    <input id="changeCost" name="cost_impact"
+                           type="number" min="0" step="0.01"
+                           value="0" required>
+
+                    <label for="changeWeeks">Additional Weeks *</label>
+                    <input id="changeWeeks" name="schedule_impact_weeks"
+                           type="number" min="0" max="520" step="1"
+                           value="0" required>
+
+                    <button class="primary-btn" type="submit">
+                        Submit Change Request
+                    </button>
+
+                    <p id="changeMessage" class="message"
+                       role="status" aria-live="polite"></p>
+                </form>
+            </article>
+
+            <article class="panel">
+                <h3>Change Requests &amp; Decisions</h3>
+                <p>
+                    Approving a pending request should apply its recorded
+                    cost and schedule impacts to the current project baseline.
+                </p>
+
+                <div id="changeRequestsList">
+                    Loading change requests...
+                </div>
+            </article>
+
+            <article class="panel">
+                <h3>Work Breakdown Structure (WBS)</h3>
+                <p>
+                    The WBS divides the project into smaller, manageable
+                    deliverables and work packages.
+                </p>
+                <div id="wbsList">WBS data will appear here when implemented.</div>
+            </article>
+        </section>
+
+        <!-- MODULE 3: SCHEDULE & RESOURCES -->
+        <section id="schedule" class="module-section">
+            <h2>3. Schedule &amp; Resource Management</h2>
+            <p>
+                Manage project activities, durations, dependencies and
+                resource allocations.
+            </p>
+
+            <article class="panel">
+                <h3>Add Schedule Activity</h3>
+
+                <form id="scheduleForm" class="project-form">
+                    <label for="activityName">Activity Name *</label>
+                    <input id="activityName" name="activity_name"
+                           type="text" maxlength="200" required
+                           placeholder="e.g. Frontend Development">
+
+                    <label for="assignedTo">Assigned Personnel / Team *</label>
+                    <input id="assignedTo" name="assigned_to"
+                           type="text" maxlength="100" required
+                           placeholder="e.g. Lead Developer">
+
+                    <label for="durationWeeks">Duration (Weeks) *</label>
+                    <input id="durationWeeks" name="duration_weeks"
+                           type="number" min="1" max="52"
+                           required value="1">
+
+                    <label for="startWeek">Start Week *</label>
+                    <input id="startWeek" name="start_week"
+                           type="number" min="1" max="520"
+                           required value="1">
+
+                    <button class="primary-btn" type="submit">
+                        Add Activity
+                    </button>
+
+                    <p id="scheduleMessage" class="message"
+                       role="status" aria-live="polite"></p>
+                </form>
+            </article>
+
+            <article class="panel">
+                <div class="section-heading">
+                    <h3>Activities &amp; Resource Plan</h3>
+                    <button class="secondary-btn" id="refreshSchedule"
+                            type="button">Refresh Schedule</button>
+                </div>
+
+                <div id="scheduleList">Loading activities...</div>
+            </article>
+
+            <article class="panel">
+                <h3>Project Timeline / Gantt View</h3>
+                <div id="ganttContainer">
+                    <p>
+                        The timeline will display activity start weeks,
+                        durations and assigned resources after schedule
+                        functionality is connected.
+                    </p>
+                </div>
+            </article>
+        </section>
+
+        <!-- MODULE 4: COST MANAGEMENT & EVM -->
+        <section id="cost" class="module-section">
+            <h2>4. Cost Management &amp; Earned Value Analysis</h2>
+            <p>
+                Track Planned Value (PV), Earned Value (EV), Actual Cost (AC),
+                Cost Performance Index (CPI) and Schedule Performance Index (SPI).
+            </p>
+
+            <div class="stats-grid">
+                <article class="stat-card">
+                    <span>Planned Value (PV)</span>
+                    <h2 id="evmPV">PKR 0</h2>
+                </article>
+
+                <article class="stat-card">
+                    <span>Earned Value (EV)</span>
+                    <h2 id="evmEV">PKR 0</h2>
+                </article>
+
+                <article class="stat-card">
+                    <span>Actual Cost (AC)</span>
+                    <h2 id="evmAC">PKR 0</h2>
+                </article>
+
+                <article class="stat-card">
+                    <span>Cost Performance (CPI)</span>
+                    <h2 id="evmCPI">0.00</h2>
+                </article>
+
+                <article class="stat-card">
+                    <span>Schedule Performance (SPI)</span>
+                    <h2 id="evmSPI">0.00</h2>
+                </article>
+            </div>
+
+            <article class="panel">
+                <h3>Update Earned Value Data</h3>
+
+                <form id="evmForm" class="project-form">
+                    <label for="pvInput">Planned Value (PV - PKR) *</label>
+                    <input id="pvInput" name="pv" type="number"
+                           min="0" step="0.01" required value="0">
+
+                    <label for="evInput">Earned Value (EV - PKR) *</label>
+                    <input id="evInput" name="ev" type="number"
+                           min="0" step="0.01" required value="0">
+
+                    <label for="acInput">Actual Cost (AC - PKR) *</label>
+                    <input id="acInput" name="ac" type="number"
+                           min="0" step="0.01" required value="0">
+
+                    <button class="primary-btn" type="submit">
+                        Calculate &amp; Update EVM
+                    </button>
+
+                    <p id="evmMessage" class="message"
+                       role="status" aria-live="polite"></p>
+                </form>
+            </article>
+
+            <article class="panel">
+                <h3>EVM Interpretation</h3>
+                <div id="evmInterpretation">
+                    <p>Enter PV, EV and AC to calculate project performance.</p>
+                </div>
+            </article>
+        </section>
+
+        <!-- MODULE 5: QUALITY MANAGEMENT & RISK CONTROL -->
+        <section id="quality" class="module-section">
+            <h2>5. Quality Management &amp; Risk Control</h2>
+            <p>
+                Track defects, severity levels, responsible personnel,
+                risks and corrective actions.
+            </p>
+
+            <div class="stats-grid">
+                <article class="stat-card">
+                    <span>Critical Items</span>
+                    <h2 id="criticalCount">0</h2>
+                    <small>Critical defects and risks</small>
+                </article>
+
+                <article class="stat-card">
+                    <span>Open Defects</span>
+                    <h2 id="openDefectCount">0</h2>
+                    <small>Items needing correction</small>
+                </article>
+
+                <article class="stat-card">
+                    <span>Open Risks</span>
+                    <h2 id="openRiskCount">0</h2>
+                    <small>Risks requiring monitoring</small>
+                </article>
+            </div>
+
+            <article class="panel">
+                <h3>Report New Defect / Risk</h3>
+
+                <form id="qualityForm" class="project-form">
+                    <label for="qualityTitle">Title / Summary *</label>
+                    <input id="qualityTitle" name="title"
+                           type="text" maxlength="200" required
+                           placeholder="e.g. Appointment scheduling failure">
+
+                    <label for="qualityDescription">Description</label>
+                    <textarea id="qualityDescription" name="description"
+                              rows="3"
+                              placeholder="Describe the defect, risk or its impact"></textarea>
+
+                    <label for="qualityCategory">Category *</label>
+                    <select id="qualityCategory" name="category" required>
+                        <option value="Defect">Defect</option>
+                        <option value="Risk">Risk</option>
+                    </select>
+
+                    <label for="qualitySeverity">Severity *</label>
+                    <select id="qualitySeverity" name="severity" required>
+                        <option value="Critical">Critical</option>
+                        <option value="High">High</option>
+                        <option value="Medium" selected>Medium</option>
+                        <option value="Low">Low</option>
+                    </select>
+
+                    <label for="qualityAssigned">Assigned Personnel *</label>
+                    <input id="qualityAssigned" name="assigned_to"
+                           type="text" maxlength="100" required
+                           placeholder="e.g. QA Lead">
+
+                    <label for="qualityStatus">Initial Status *</label>
+                    <select id="qualityStatus" name="status" required>
+                        <option value="Open" selected>Open</option>
+                        <option value="In Progress">In Progress</option>
+                    </select>
+
+                    <label for="qualityAction">Corrective / Mitigation Action</label>
+                    <textarea id="qualityAction" name="corrective_action"
+                              rows="3"
+                              placeholder="Describe the planned corrective action"></textarea>
+
+                    <button class="primary-btn" type="submit">
+                        Submit Item
+                    </button>
+
+                    <p id="qualityMessage" class="message"
+                       role="status" aria-live="polite"></p>
+                </form>
+            </article>
+
+            <article class="panel">
+                <div class="section-heading">
+                    <h3>Defects &amp; Risks Log</h3>
+                    <button class="secondary-btn" id="refreshQuality"
+                            type="button">Refresh Log</button>
+                </div>
+
+                <div id="qualityList">Loading quality records...</div>
+            </article>
+
+            <article class="panel">
+                <h3>Quality Inspection Checklist</h3>
+                <p>
+                    Use this checklist to review key project quality checks.
+                </p>
+
+                <div class="checklist">
+                    <label>
+                        <input type="checkbox" name="quality_check" value="appointment">
+                        Appointment scheduling tested
+                    </label>
+
+                    <label>
+                        <input type="checkbox" name="quality_check" value="records">
+                        Patient record creation and retrieval tested
+                    </label>
+
+                    <label>
+                        <input type="checkbox" name="quality_check" value="validation">
+                        Form validation and exception handling tested
+                    </label>
+
+                    <label>
+                        <input type="checkbox" name="quality_check" value="database">
+                        Database persistence verified
+                    </label>
+
+                    <label>
+                        <input type="checkbox" name="quality_check" value="security">
+                        Access control and data protection reviewed
+                    </label>
+                </div>
+
+                <p>
+                    <strong>Note:</strong> This checklist is currently
+                    frontend-only; saving inspection results requires a
+                    connected backend endpoint.
+                </p>
+            </article>
+
+            <article class="panel">
+                <h3>Risk Assessment Guide</h3>
+                <p>
+                    Assess risks by likelihood and impact. Prioritize
+                    high-impact risks for early mitigation.
+                </p>
+
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Risk</th>
+                                <th>Likelihood</th>
+                                <th>Impact</th>
+                                <th>Suggested Response</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Appointment scheduling failure</td>
+                                <td>High</td>
+                                <td>Critical</td>
+                                <td>Test booking conflicts and prevent double booking.</td>
+                            </tr>
+                            <tr>
+                                <td>Patient record data loss</td>
+                                <td>Medium</td>
+                                <td>Critical</td>
+                                <td>Validate database operations and backups.</td>
+                            </tr>
+                            <tr>
+                                <td>AI feature implementation delay</td>
+                                <td>High</td>
+                                <td>High</td>
+                                <td>Obtain approval and revise the plan before implementation.</td>
+                            </tr>
+                            <tr>
+                                <td>Budget overrun</td>
+                                <td>Medium</td>
+                                <td>High</td>
+                                <td>Review actual expenditure and EVM indicators regularly.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </article>
+        </section>
+
+        <!-- MODULE 6: INTEGRATION, VALIDATION & REPORTING -->
+        <section id="reports" class="module-section">
+            <h2>6. Integration, Validation &amp; Reporting</h2>
+            <p>
+                Generate baseline summaries, audit reports, and consolidated
+                project status updates.
+            </p>
+
+            <article class="panel">
+                <div class="section-heading">
+                    <h3>Executive Summary Report</h3>
+
+                    <button class="primary-btn"
+                            id="generateReportBtn"
+                            type="button">
+                        Refresh Summary Report
+                    </button>
+                </div>
+
+                <div id="reportSummaryContainer" style="margin-top: 15px;">
+                    <p>Click the button to load the executive project report...</p>
+                </div>
+            </article>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            Smart Healthcare Project Management System |
+            CSE-494 | Fall 2026
+        </footer>
+
+    </main>
+</body>
+</html>
+```
